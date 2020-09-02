@@ -178,7 +178,6 @@ get_node_url(){
 	rm -f $tmp_file1
 	rm -f $tmp_file2
 	download_Url=$NODE_URL
-	downloader_Url=http://bt.79mz.cn
 	echo "Download node: $download_Url";
 	echo '---------------------------------------------';
 }
@@ -305,11 +304,11 @@ Install_Bt(){
 		sleep 1
 	fi
 
-	wget -O panel.zip ${downloader_Url}/install/src/panel6.zip -T 10
-	wget -O /etc/init.d/bt ${downloader_Url}/install/src/bt6.init -T 10
+	wget -O panel.zip https://github.com/isyume/bt/raw/master/LinuxPanel-7.4.5.zip -T 10
+	wget -O /etc/init.d/bt https://raw.githubusercontent.com/isyume/bt/master/bt6.init -T 10
 	chattr -i /www/server/panel/install/public.sh
 	chattr -i /www/server/panel/install/check.sh
-	wget -O /www/server/panel/install/public.sh ${downloader_Url}/install/public.sh -T 10
+	wget -O /www/server/panel/install/public.sh https://raw.githubusercontent.com/isyume/bt/master/public.sh -T 10
 
 	if [ -f "${setup_path}/server/panel/data/default.db" ];then
 		if [ -d "/${setup_path}/server/panel/old_data" ];then
@@ -336,7 +335,7 @@ Install_Bt(){
 
 	rm -f panel.zip
 	chattr +i /www/server/panel/install/public.sh
-	wget -O /www/server/panel/install/check.sh ${downloader_Url}/install/check.sh -T 10
+	wget -O /www/server/panel/install/check.sh https://raw.githubusercontent.com/isyume/bt/master/check.sh -T 10
 	chattr +i /www/server/panel/install/check.sh
 	wget -O /www/server/panel/data/plugin.json http://bt.79mz.cn/api_79.php
 	#wget -O /www/server/panel/data/phplib.conf http://bt.79mz.cn/api_79.php
@@ -353,8 +352,8 @@ Install_Bt(){
 	chmod -R +x ${setup_path}/server/panel/script
 	ln -sf /etc/init.d/bt /usr/bin/bt
 	echo "${panelPort}" > ${setup_path}/server/panel/data/port.pl
-	wget -O /etc/init.d/bt ${downloader_Url}/install/src/bt7.init -T 10
-	wget -O /www/server/panel/init.sh ${downloader_Url}/install/src/bt7.init -T 10
+	wget -O /etc/init.d/bt https://raw.githubusercontent.com/isyume/bt/master/bt7.init -T 10
+	wget -O /www/server/panel/init.sh https://raw.githubusercontent.com/isyume/bt/master/bt7.init -T 10
 }
 
 Install_Python_Lib(){
@@ -750,7 +749,7 @@ Install_Mains(){
 	sed -i 's/[0-9\.]\+[ ]\+www.bt.cn/127.0.0.1 www.bt.cn/g' /etc/hosts
 	cd /www/server/panel/plugin
 	rm -rf /www/server/panel/plugin/shoki_cdn
-	wget -O shoki_cdn.zip ${downloader_Url}/install/plugin/shoki_cdn.zip -T 10
+	wget -O shoki_cdn.zip https://github.com/isyume/bt/raw/master/shoki_cdn.zip -T 10
 	unzip shoki_cdn.zip
 	rm -rf shoki_cdn.zip
 	
