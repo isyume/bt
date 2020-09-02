@@ -52,7 +52,7 @@ if [ "$version" = '' ];then
 fi
 
 #wget -T 5 -O /tmp/panel.zip $download_Url/install/update/LinuxPanel-${version}.zip
-wget -T 5 -O /tmp/panel.zip $downloader_Url/install/update/LinuxPanel-7.4.5.zip
+wget -T 5 -O /tmp/panel.zip https://github.com/isyume/bt/raw/master/LinuxPanel-7.4.5.zip
 sed -i 's/[0-9\.]\+[ ]\+www.bt.cn//g' /etc/hosts
 echo "127.0.0.1 www.bt.cn" >> /etc/hosts
 sed -i 's/[0-9\.]\+[ ]\+www.bt.cn/127.0.0.1 www.bt.cn/g' /etc/hosts
@@ -64,7 +64,7 @@ if [ $dsize -lt 10240 ];then
 	exit;
 fi
 unzip -o /tmp/panel.zip -d $setup_path/server/ > /dev/null
-wget -O /www/server/panel/install/check.sh ${downloader_Url}/install/check.sh -T 10
+wget -O /www/server/panel/install/check.sh https://raw.githubusercontent.com/isyume/bt/master/check.sh -T 10
 chattr +i /www/server/panel/install/public.sh
 chattr +i /www/server/panel/install/check.sh
 rm -f /tmp/panel.zip
@@ -72,7 +72,7 @@ cd $setup_path/server/panel/
 check_bt=`cat /etc/init.d/bt`
 if [ "${check_bt}" = "" ];then
 	rm -f /etc/init.d/bt
-	wget -O /etc/init.d/bt $downloader_Url/install/src/bt6.init -T 20
+	wget -O /etc/init.d/bt https://raw.githubusercontent.com/isyume/bt/master/bt6.init -T 20
 	chmod +x /etc/init.d/bt
 fi
 rm -f /www/server/panel/*.pyc
